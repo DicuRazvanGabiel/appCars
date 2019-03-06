@@ -51,13 +51,15 @@ const switchNavigator = createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
     
     //Main App tabNavigator
-    App: TabNavigator,
+    App: CarListScreen,
     
     //Screen for introducing user and pass 
-    AuthenticationScreen: CarListScreen
+    AuthenticationScreen: CarListScreen,
+    
+    ProfileScreen: ProfileScreen
   },
   {
-    initialRouteName: 'AuthenticationScreen',
+    initialRouteName: 'App', 
   }
 );
 

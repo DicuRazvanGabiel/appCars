@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
-
 const styles = StyleSheet.create({
 
   container:{
@@ -35,13 +34,14 @@ export default class OptionsHeader extends Component {
                 <Ionicons name="ios-options" size={40} color="black" />
               </TouchableOpacity >
             </View>
-          
+           
           <View style={styles.profileButton} >
-            <TouchableOpacity  onPress={this._onPressProfileButton}>
+            <TouchableOpacity  onPress={()=> this.props.navigation.navigate("ProfileScreen") }>
               <Ionicons name="ios-person" size={40} color="black" />
             </TouchableOpacity>
           </View>
       </View>
+
           
     )
   }
