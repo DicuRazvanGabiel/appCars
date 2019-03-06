@@ -19,21 +19,83 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginBottom: 10
   },
-
-  modalfilterItem: {
-    height: "auto",
-    width: "auto"
-
-  }
   
 });
 
 export default class CarListScreen extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     isModalFilterListVisible: false,
     isModalFilterItemVisible: false,
-    elementsModalItem: []
+    filterList: [
+      {
+        label: 'Brand',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }, {
+        label: 'Combustibil',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }, {
+        label: 'Volum',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }, {
+        label: 'Numar de locuri',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }, {
+        label: 'Cutie de viteze',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }, {
+        label: 'Pachet',
+        child: [
+          'BWM',
+          'Mercedes'
+        ]
+      }
+    ],
+
+    appliedFiltersList: [
+      {
+          label: 'Mercedes'
+      },
+      {
+          label: 'Benzina'
+      },
+      {
+          label: 'Automata'
+      }
+    ],
+
+    carList: [
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+      { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
+    ]
   };
 
   _toggleModalFilterList = () => {
@@ -46,6 +108,7 @@ export default class CarListScreen extends Component {
 
   _renderModalFilterListContent= () => (
     <View style={{ flex: 1, backgroundColor: "white" }}>
+
       <View style={styles.headerModal} >
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TouchableOpacity onPress={this._toggleModalFilterList}>
@@ -57,13 +120,14 @@ export default class CarListScreen extends Component {
           <Text style={{color: "#C4161C"}}>Sterge Filtre</Text>
         </View>
       </View>
-      <FilterList toggleModalFilterItem={this._toggleModalFilterItem}/>
+
+      <FilterList toggleModalFilterItem={this._toggleModalFilterItem} filterList={this.state.filterList}/>
+
     </View> 
   );
 
-  _toggleModalFilterItem = (obj) => {
+  _toggleModalFilterItem = () => {
     this.setState({ isModalFilterItemVisible: !this.state.isModalFilterItemVisible });
-    //this.setState({ elementsModalItem: obj.child })
   }
 
   _renderModalFilterItemContent= () => (
@@ -71,8 +135,10 @@ export default class CarListScreen extends Component {
       <TouchableOpacity onPress={this._toggleModalFilterItem}>
         <AntDesign name="closecircleo" size={40} style={{marginLeft: 10, marginTop: 10}} color="black" />
       </TouchableOpacity>
+
+      <FilterModalItem items={this.state.filterList}/>
       
-    </View> 
+    </View>
   );
 
   render() {
@@ -80,7 +146,7 @@ export default class CarListScreen extends Component {
       <Container>
         <StatusBarBackground />
         <OptionsHeader toggleModal={this._toggleModalFilterList} navigation={this.props.navigation}/>
-        <AppliedFilters />
+        <AppliedFilters appliedFiltersList={this.state.appliedFiltersList} carList={this.state.carList}/>
         <Modal isVisible={this.state.isModalFilterListVisible}>
           {this._renderModalFilterListContent()}
         </Modal>

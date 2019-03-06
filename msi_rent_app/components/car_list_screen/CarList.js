@@ -6,21 +6,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
-const dataArray = [
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
-  
-];
-
 const styles = StyleSheet.create({
   
   titleContainerExpanded: {
@@ -140,7 +125,7 @@ export default class CarList extends Component {
     return (
       <Container>
         <Accordion style={{backgroundColor: "#1D2228"}}
-          dataArray={dataArray}
+          dataArray={this.props.carList}
           animation={false}
           expanded={true}
           renderHeader={this._renderHeader}

@@ -35,18 +35,9 @@ const styles = StyleSheet.create({
 export default class AppliedFilters extends Component {
 
     state = {
-        appliedFiltersList : [
-            {
-                label: 'Mercedes'
-            },
-            {
-                label: 'Benzina'
-            },
-            {
-                label: 'Automata'
-            }
-        ]
+        appliedFiltersList : this.props.appliedFiltersList
     }
+
 
   render() {
     return (
@@ -61,7 +52,7 @@ export default class AppliedFilters extends Component {
                     <AppliedFilterslist  filterList={this.state.appliedFiltersList} />
                 </ScrollView>
             </View>
-            <CarList />
+            <CarList carList={this.props.carList}/>
         </Container>
     )
   }
