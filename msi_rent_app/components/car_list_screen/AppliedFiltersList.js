@@ -5,7 +5,11 @@ export default class AppliedFiltersList extends Component {
   render() {
     return this.props.filterList.map(
             (filter) => (
-                <AppliedFilterItem key={filter.label} label={filter.label}/>
+                <AppliedFilterItem 
+                  key={filter.label} 
+                  filter={filter}
+                  removeApliedFilter={this.props.removeApliedFilter}
+                  />
             )
         ); 
   }

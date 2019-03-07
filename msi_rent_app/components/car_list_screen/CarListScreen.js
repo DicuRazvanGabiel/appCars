@@ -8,6 +8,7 @@ import Modal from "react-native-modal";
 import FilterList from "./FilterList"
 import { AntDesign } from '@expo/vector-icons';
 import FilterModalItem from './FilterModalItem';
+import _ from 'lodash';
 
 const styles = StyleSheet.create({
 
@@ -31,6 +32,7 @@ export default class CarListScreen extends Component {
   state = {
     isModalFilterListVisible: false,
     isModalFilterItemVisible: false,
+    subFilterItem: [],
     filterList: [
       {
         label: 'Brand',
@@ -41,47 +43,40 @@ export default class CarListScreen extends Component {
       }, {
         label: 'Combustibil',
         child: [
-          'BWM',
-          'Mercedes'
+          'Motorina',
+          'Benzina'
         ]
       }, {
         label: 'Volum',
         child: [
-          'BWM',
-          'Mercedes'
+          'Volum: 100',
+          'Volum: 200',
+          'Volum: 300'
         ]
       }, {
         label: 'Numar de locuri',
         child: [
-          'BWM',
-          'Mercedes'
+          'Numar locuri: 4',
+          'Numar locuri: 5',
+          'Numar locuri: 8'
         ]
       }, {
         label: 'Cutie de viteze',
         child: [
-          'BWM',
-          'Mercedes'
+          'Automata',
+          'Manuala'
         ]
       }, {
         label: 'Pachet',
         child: [
-          'BWM',
-          'Mercedes'
+          'Green',
+          'Red',
+          'Black'
         ]
       }
     ],
 
-    appliedFiltersList: [
-      {
-          label: 'Mercedes'
-      },
-      {
-          label: 'Benzina'
-      },
-      {
-          label: 'Automata'
-      }
-    ],
+    appliedFiltersList: [],
 
     carList: [
       { pachet: "GREEN", title: "Mercedes cls", url: "https://res.cloudinary.com/carsguide/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2018-mercedes-benz-cls450-sedan-grey-richard-berry-1200x800-%283%29.JPG", content: "Lorem ipsum dolor sit amet" },
@@ -106,9 +101,14 @@ export default class CarListScreen extends Component {
     console.log("profile");
   }
 
+  _addFilters = (child, item) =>{
+    var joined = this.state.appliedFiltersList.concat({label: child});
+    this.setState({ appliedFiltersList: joined })
+    this._toggleModalFilterItem();
+  }
+
   _renderModalFilterListContent= () => (
     <View style={{ flex: 1, backgroundColor: "white" }}>
-
       <View style={styles.headerModal} >
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TouchableOpacity onPress={this._toggleModalFilterList}>
@@ -120,9 +120,7 @@ export default class CarListScreen extends Component {
           <Text style={{color: "#C4161C"}}>Sterge Filtre</Text>
         </View>
       </View>
-
-      <FilterList toggleModalFilterItem={this._toggleModalFilterItem} filterList={this.state.filterList}/>
-
+      <FilterList openModalFilterItem={this._openModalFilterItem} filterList={this.state.filterList}/>
     </View> 
   );
 
@@ -130,23 +128,48 @@ export default class CarListScreen extends Component {
     this.setState({ isModalFilterItemVisible: !this.state.isModalFilterItemVisible });
   }
 
+  _openModalFilterItem = (subItem) => {
+    this.setState({ isModalFilterItemVisible: true });
+    this.setState({ subFilterItem: subItem });
+  }
+
   _renderModalFilterItemContent= () => (
     <View style={{ flex: 1, backgroundColor: "white"}}>
       <TouchableOpacity onPress={this._toggleModalFilterItem}>
         <AntDesign name="closecircleo" size={40} style={{marginLeft: 10, marginTop: 10}} color="black" />
       </TouchableOpacity>
-
-      <FilterModalItem items={this.state.filterList}/>
-      
+      <FilterModalItem items={this.state.subFilterItem} addFilter={this._addFilters}/>
     </View>
   );
+
+  _removeApliedFilter = (filter)=>{
+    console.log("aici");
+    console.log(this.state.appliedFiltersList);
+
+    var temp_array = _.remove(this.state.appliedFiltersList, function(myfilter) {
+      return filter.label === myfilter.label;
+    });
+
+    console.log(temp_array);
+    this.setState({ appliedFiltersList: temp_array })
+    
+    /*
+    var joined = this.state.appliedFiltersList.concat({label: child});
+    
+    this._toggleModalFilterItem();
+    */
+  }
 
   render() {
     return (
       <Container>
         <StatusBarBackground />
         <OptionsHeader toggleModal={this._toggleModalFilterList} navigation={this.props.navigation}/>
-        <AppliedFilters appliedFiltersList={this.state.appliedFiltersList} carList={this.state.carList}/>
+        <AppliedFilters 
+          appliedFiltersList={this.state.appliedFiltersList}
+          carList={this.state.carList}
+          removeApliedFilter={this._removeApliedFilter}
+         />
         <Modal isVisible={this.state.isModalFilterListVisible}>
           {this._renderModalFilterListContent()}
         </Modal>

@@ -16,12 +16,18 @@ const styles = StyleSheet.create({
 });
 
 export default class FilterListItem extends Component {
+
+  state = {
+    filter: this.props.filter
+  };
+
+
   render() {
     return (
       <View>
         <View style={styles.elementFilter}>
-            <TouchableOpacity onPress={() => this.props.toggleModalFilterItem()}>
-                <Text style={styles.textItem}> > {this.props.filter.label} </Text>
+            <TouchableOpacity onPress={() => this.props.openModalFilterItem(this.state.filter)}>
+                <Text style={styles.textItem}> > {this.state.filter.label} </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 
 const styles = StyleSheet.create({
 
     container: {
-        margin: 5,
-        borderRadius: 20,
-        backgroundColor: '#C4161C',
-        width: 'auto',
-        height: 40,
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+      margin: 5,
+      borderRadius: 20,
+      backgroundColor: '#C4161C',
+      width: 'auto',
+      height: 40,
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },  
 
     label: {
@@ -31,17 +31,24 @@ const styles = StyleSheet.create({
 });
 
 export default class AppliedFilterItem extends Component {
+
+  state ={
+    filter: this.props.filter
+  } 
+
   render() {
     return (
-        <View style={styles.container}>
-           <Text style={styles.label}>
-                {this.props.label}
-           </Text>
+      <View style={styles.container}>
+        <Text style={styles.label}>
+          {this.state.filter.label}
+        </Text>
 
-            <View style={styles.removeButton}> 
-                <Ionicons name="ios-close-circle" size={20} color="white" />
-            </View>
+        <View style={styles.removeButton}> 
+          <TouchableOpacity onPress={() => this.props.removeApliedFilter(this.state.filter)}>
+            <Ionicons name="ios-close-circle" size={20} color="white" />
+          </TouchableOpacity>
         </View>
+      </View>
     )
   }
 }

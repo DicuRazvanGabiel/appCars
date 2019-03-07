@@ -21,7 +21,7 @@ export default class FilterList extends Component {
   render() {
     return this.state.filterList.map(
       (filter) => (
-          <FilterListItem key={filter.label} filter={filter} toggleModalFilterItem={this.props.toggleModalFilterItem}/>
+          <FilterListItem key={filter.label} filter={filter} openModalFilterItem={this.props.openModalFilterItem}/>
       )) 
   }
 }

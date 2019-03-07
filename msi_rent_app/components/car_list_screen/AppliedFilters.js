@@ -38,6 +38,9 @@ export default class AppliedFilters extends Component {
         appliedFiltersList : this.props.appliedFiltersList
     }
 
+    componentWillReceiveProps() {
+        this.setState({appliedFiltersList: this.props.appliedFiltersList})
+      }
 
   render() {
     return (
@@ -49,7 +52,9 @@ export default class AppliedFilters extends Component {
 
             <View style={styles.filterListStyle}>
                 <ScrollView  horizontal={true} >
-                    <AppliedFilterslist  filterList={this.state.appliedFiltersList} />
+                    <AppliedFilterslist  
+                        removeApliedFilter={this.props.removeApliedFilter}
+                        filterList={this.state.appliedFiltersList} />
                 </ScrollView>
             </View>
             <CarList carList={this.props.carList}/>
