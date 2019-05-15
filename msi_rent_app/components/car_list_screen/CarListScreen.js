@@ -143,21 +143,11 @@ export default class CarListScreen extends Component {
   );
 
   _removeApliedFilter = (filter)=>{
-    console.log("aici");
-    console.log(this.state.appliedFiltersList);
-
     var temp_array = _.remove(this.state.appliedFiltersList, function(myfilter) {
-      return filter.label === myfilter.label;
+      return filter.label == myfilter.label;
     });
 
-    console.log(temp_array);
-    this.setState({ appliedFiltersList: temp_array })
-    
-    /*
-    var joined = this.state.appliedFiltersList.concat({label: child});
-    
-    this._toggleModalFilterItem();
-    */
+    this.setState({ appliedFiltersList: temp_array });
   }
 
   render() {

@@ -54,18 +54,19 @@ const switchNavigator = createSwitchNavigator(
     App: CarListScreen,
     
     //Screen for introducing user and pass 
-    AuthenticationScreen: CarListScreen,
+    AuthenticationScreen: AuthenticationScreen,
     
     ProfileScreen: ProfileScreen
   },
   {
-    initialRouteName: 'App', 
+    initialRouteName: 'AuthenticationScreen', 
   }
 );
 
 const AppContainer = createAppContainer(switchNavigator);
 
 export default class App extends React.Component {
+  
   render() {
     return <AppContainer />
   }
