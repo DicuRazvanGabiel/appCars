@@ -46,10 +46,7 @@ const TabNavigator = createBottomTabNavigator({
 });
 
 const switchNavigator = createSwitchNavigator(
-  {
-    //Screen for auto log in, needs to read from memory the tocken and redirect to App screen
-    AuthLoading: AuthLoadingScreen,
-    
+  {  
     //Main App tabNavigator
     App: CarListScreen,
     
